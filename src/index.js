@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './App';
+import { RobotContextProvider } from './robotContext';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <RobotContextProvider>
     <App />
-  </React.StrictMode>,
+  </RobotContextProvider>,
   document.getElementById('root')
 );
 
