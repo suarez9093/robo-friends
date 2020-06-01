@@ -1,11 +1,12 @@
-import React, { useState, createContext } from 'react';
-import { robots } from './robots';
+import React, { useState, createContext, useEffect } from 'react';
 const SearchContext = createContext();
 
 
 function RobotContextProvider(props) {
     const [searchInput, setSearchInput] = useState("");
-    const [robot, setRobot] = useState(robots);
+    const [robot, setRobot] = useState([]);
+
+
 
     function searchRobot(e) {
         const { value } = e.target
@@ -13,9 +14,11 @@ function RobotContextProvider(props) {
     }
 
 
+    useEffect(() => {
+        fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(data => setRobot(data))
+    }, [])
 
     const filteredRobot = robot.filter(robot => robot.username.toLowerCase().includes(searchInput))
-
 
     return (
 
