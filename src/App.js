@@ -2,6 +2,7 @@ import React from 'react';
 import CardList from './components/CardList';
 import SearchBar from './components/SearchBar';
 import Scroll from './components/Scroll/index';
+import ErrorBoundry from './components/ErrorBoundry';
 
 function App() {
   return (
@@ -9,8 +10,9 @@ function App() {
       <h1 className="title">RoboFriends</h1>
       <SearchBar />
       <Scroll>
-        <CardList />
-
+        <ErrorBoundry>
+          <CardList />
+        </ErrorBoundry>
       </Scroll>
     </div>
   );
