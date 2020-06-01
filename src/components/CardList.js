@@ -5,7 +5,8 @@ import { SearchContext } from '../robotContext';
 
 
 function CardList() {
-    const { robot, filteredRobot } = useContext(SearchContext)
+    const { filteredRobot } = useContext(SearchContext)
+
     return (
         filteredRobot.map(bot => <Card key={bot.id} bot={bot} />)
 
