@@ -18,7 +18,7 @@ function RobotContextProvider(props) {
         fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(data => setRobot(data))
     }, [])
 
-    const filteredRobot = robot.filter(robot => robot.username.toLowerCase().includes(searchInput))
+    const filteredRobot = robot.filter(robot => robot.username.toLowerCase().includes(searchInput.toLowerCase()))
 
     return (
 
