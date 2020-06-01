@@ -1,15 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import { Provider, connect } from 'react-redux';
+import { createStore } from 'redux';
+import { searchRobots } from './reducers';
 import App from './App';
-import { RobotContextProvider } from './robotContext';
 import * as serviceWorker from './serviceWorker';
 import './index.css'
 
+const store = createStore(searchRobots)
+
 ReactDOM.render(
-  <RobotContextProvider>
+  <Provider store={store}>
     <App />
-  </RobotContextProvider>,
+
+  </Provider>
+
+  ,
   document.getElementById('root')
 );
 
