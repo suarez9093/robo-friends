@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { RobotContextProvider } from './robotContext';
 import * as serviceWorker from './serviceWorker';
+import './index.css'
 
 ReactDOM.render(
   <RobotContextProvider>
