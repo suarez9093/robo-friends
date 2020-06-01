@@ -1,13 +1,13 @@
 import React from 'react';
-import Card from './components/Card';
-import { robots } from './robots';
-
+import CardList from './components/CardList';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <div >
-      {robots.map(robot => <Card robot={robot} />)}
-
+    <div className="tc">
+      <h1>RoboFriends</h1>
+      <SearchBar />
+      <CardList />
     </div>
   );
 }
