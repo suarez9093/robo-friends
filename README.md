@@ -18,6 +18,8 @@
 ### Built With
 
 - [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Redux Redux](https://react-redux.js.org/)
 
 <!-- CONTACT -->
 

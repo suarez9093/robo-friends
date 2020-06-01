@@ -4,45 +4,48 @@ import SearchBar from './components/SearchBar';
 import Scroll from './components/Scroll/index';
 import ErrorBoundry from './components/ErrorBoundry';
 import { connect } from "react-redux"
-// import { searchRobots } from './reducers';
-import { setSearchField } from './actions'
+import { setSearchField, requestRobots } from './actions'
 
 
 const mapStateToProps = state => {
   console.log("state: ", state)
   return {
-    searchField: state.searchField
+    searchField: state.searchRobots.searchField,
+    isPending: state.requestRobots.isPending,
+    robots: state.requestRobots.robots,
+    error: state.requestRobots.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
 
-    searchRobot: (e) => dispatch(setSearchField(e.target.value))
+    searchRobot: (e) => dispatch(setSearchField(e.target.value)),
+    onRequestRobots: () => dispatch(requestRobots())
   }
 }
 
 function App(props) {
-  const [robot, setRobot] = useState([]);
+  // const [robot, setRobot] = useState([]);
 
-  const { searchField, searchRobot } = props
+  const { searchField, searchRobot, robots, isPending } = props
 
-  const filteredRobot = robot.filter(robot => robot.username.toLowerCase().includes(searchField.toLowerCase()))
-  useEffect(() => {
+  const filteredRobot = robots.filter(robot => robot.username.toLowerCase().includes(searchField.toLowerCase()))
 
-    fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()).then(data => setRobot(data))
-  }, [])
-  return (
-    <div className="tc">
-      <h1 className="title">RoboFriends</h1>
-      <SearchBar searchRobot={searchRobot} />
-      <Scroll>
-        <ErrorBoundry>
-          <CardList robots={filteredRobot} />
-        </ErrorBoundry>
-      </Scroll>
-    </div>
-  );
+  useEffect(() => props.onRequestRobots(), [])
+
+  return isPending ? <h1>Loading...</h1> :
+    (
+      <div className="tc">
+        <h1 className="title">RoboFriends</h1>
+        <SearchBar searchRobot={searchRobot} />
+        <Scroll>
+          <ErrorBoundry>
+            <CardList robots={filteredRobot} />
+          </ErrorBoundry>
+        </Scroll>
+      </div>
+    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
